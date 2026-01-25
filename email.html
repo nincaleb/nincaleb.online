@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>nincaleb — email</title>
+  <meta name="description" content="Email access for @nincaleb.online" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <header class="hero">
+      <div class="badge">Email</div>
+      <h1 style="margin-top:14px">nincaleb.online mail</h1>
+      <p class="sub">
+        This site does <b>not</b> collect passwords. Use your real email vault / viewer.
+      </p>
+
+      <div class="cta-row" style="margin-top:18px">
+        <a class="btn primary" href="https://app.sage.party/email" target="_blank" rel="noreferrer">Open SAGE Email</a>
+        <a class="btn" href="https://app.sage.party/email" target="_blank" rel="noreferrer">Go to inbox</a>
+        <a class="btn" href="index.html">Back</a>
+      </div>
+
+      <p class="hint" style="margin-top:12px">
+        If you want this button to go to a specific “View Emails / Vault” screen, paste the exact SAGE URL after you click it
+        (I’ll wire it in).
+      </p>
+    </header>
+
+    <section class="card">
+      <h2>How it works (quick)</h2>
+      <p class="fineprint" style="margin-top:10px">
+        Your domain uses Cloudflare Email Routing, which forwards mail to your SAGE forwarding / ingest address.
+        You view those messages inside SAGE’s web UI.
+      </p>
+
+      <div class="divider"></div>
+
+      <h2>Safety</h2>
+      <p class="fineprint" style="margin-top:10px">
+        A custom “webmail login form” on a personal site is risky and often blocked by browsers — so this page only links you to the official inbox UI.
+      </p>
+    </section>
+
+    <footer class="foot">
+      <span>© <span id="year"></span> nincaleb</span>
+      <span class="sep">•</span>
+      <a href="index.html">home</a>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

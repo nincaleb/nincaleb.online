@@ -35,10 +35,9 @@ function setStatus(on){
   }
 }
 
-// Twitch embeds require "parent" to match the host domain.
 function buildTwitchUrls(){
   const parent = window.location.hostname || "localhost";
-  parentHint.textContent = "parent=" + parent;
+  if(parentHint) parentHint.textContent = "parent=" + parent;
 
   const player = `https://player.twitch.tv/?channel=nincaleb&parent=${encodeURIComponent(parent)}&autoplay=false`;
   const chat = `https://www.twitch.tv/embed/nincaleb/chat?parent=${encodeURIComponent(parent)}&darkpopout`;
@@ -47,60 +46,71 @@ function buildTwitchUrls(){
 
 let embedOn = false;
 
-$("toggleEmbed").addEventListener("click", () => {
-  embedOn = !embedOn;
+const toggle = $("toggleEmbed");
+if(toggle){
+  toggle.addEventListener("click", () => {
+    embedOn = !embedOn;
 
-  if(embedOn){
-    const { player, chat } = buildTwitchUrls();
+    if(embedOn){
+      const { player, chat } = buildTwitchUrls();
 
-    if(!window.location.hostname){
-      openModal("The Twitch embed usually won’t load from a local file. Host this page on a domain (Cloudflare Pages / GitHub Pages), then try again.");
+      if(!window.location.hostname){
+        openModal("The Twitch embed usually won’t load from a local file. Host this page on a domain (Cloudflare Pages / GitHub Pages), then try again.");
+      }
+
+      $("twitchPlayer").src = player;
+      $("twitchChat").src = chat;
+      embedWrap.hidden = false;
+      setStatus(true);
+      toggle.textContent = "Hide live (embed)";
+    }else{
+      $("twitchPlayer").src = "";
+      $("twitchChat").src = "";
+      embedWrap.hidden = true;
+      setStatus(false);
+      toggle.textContent = "Watch live (embed)";
     }
+  });
+}
 
-    $("twitchPlayer").src = player;
-    $("twitchChat").src = chat;
-    embedWrap.hidden = false;
-    setStatus(true);
-    $("toggleEmbed").textContent = "Hide live (embed)";
-  }else{
-    $("twitchPlayer").src = "";
-    $("twitchChat").src = "";
-    embedWrap.hidden = true;
-    setStatus(false);
-    $("toggleEmbed").textContent = "Watch live (embed)";
-  }
-});
+const copyDiscord = $("copyDiscord");
+if(copyDiscord){
+  copyDiscord.addEventListener("click", async () => {
+    const text = "nincaleb";
+    try{
+      await navigator.clipboard.writeText(text);
+      openModal("Copied Discord username: " + text);
+    }catch{
+      openModal("Couldn’t auto-copy. Discord: " + text);
+    }
+  });
+}
 
-$("copyDiscord").addEventListener("click", async () => {
-  const text = "nincaleb";
-  try{
-    await navigator.clipboard.writeText(text);
-    openModal("Copied Discord username: " + text);
-  }catch{
-    openModal("Couldn’t auto-copy. Discord: " + text);
-  }
-});
+const copyLinks = $("copyLinks");
+if(copyLinks){
+  copyLinks.addEventListener("click", async () => {
+    const links = [
+      "Twitch: https://twitch.tv/nincaleb",
+      "YouTube: https://youtube.com/nincalebfn",
+      "GitHub: https://github.com/nincaleb",
+      "Steam: https://steamcommunity.com/id/nincaleb"
+    ].join("\n");
 
-$("copyLinks").addEventListener("click", async () => {
-  const links = [
-    "Twitch: https://twitch.tv/nincaleb",
-    "YouTube: https://youtube.com/nincalebfn",
-    "GitHub: https://github.com/nincaleb",
-    "Steam: https://steamcommunity.com/id/nincaleb"
-  ].join("\n");
+    try{
+      await navigator.clipboard.writeText(links);
+      openModal("Copied all links.");
+    }catch{
+      openModal("Couldn’t auto-copy.\n\n" + links);
+    }
+  });
+}
 
-  try{
-    await navigator.clipboard.writeText(links);
-    openModal("Copied all links.");
-  }catch{
-    openModal("Couldn’t auto-copy.\n\n" + links);
-  }
-});
+const troll = $("troll");
+if(troll){
+  troll.addEventListener("click", () => {
+    openModal("You clicked the totally normal button. Nothing happens. (That’s the joke.)");
+  });
+}
 
-$("troll").addEventListener("click", () => {
-  openModal("You clicked the totally normal button. Nothing happens. (That’s the joke.)");
-});
-
-// init
-parentHint.textContent = window.location.hostname ? ("parent=" + window.location.hostname) : "parent=(host to enable)";
-setStatus(false);
+if(parentHint) parentHint.textContent = window.location.hostname ? ("parent=" + window.location.hostname) : "parent=(host to enable)";
+if(statusText) setStatus(false);
