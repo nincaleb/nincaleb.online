@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>nincaleb — links</title>
-  <meta name="description" content="nincaleb — Twitch, YouTube, GitHub, Steam, and contact." />
+  <title>nincaleb.online — email</title>
+  <meta name="description" content="Email login for nincaleb.online" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -12,126 +12,78 @@
 
   <main class="wrap">
     <header class="hero">
-      <div class="badge" title="aka nincaleb">nincaleb</div>
+      <div class="badge">nincaleb.online</div>
 
       <div class="head-row">
-        <div class="avatar" aria-hidden="true">
-          <span>nc</span>
-        </div>
-
+        <div class="avatar" aria-hidden="true"><span>mail</span></div>
         <div class="head-text">
-          <h1 id="title">Caleb “nincaleb”</h1>
-          <p class="sub">Streaming, building, and shipping questionable ideas.</p>
-
-          <div class="chips" aria-label="highlights">
-            <span class="chip">CS2</span>
-            <span class="chip">projects</span>
-            <span class="chip">clips</span>
-            <span class="chip">grindset</span>
+          <h1>Email login</h1>
+          <p class="sub">Use the embedded login below, or open it in a new tab.</p>
+          <div class="chips" aria-label="notes">
+            <span class="chip">SAGE Email</span>
+            <span class="chip">secure login</span>
+            <span class="chip">no passwords stored here</span>
           </div>
         </div>
       </div>
 
       <div class="cta-row">
-        <a class="btn primary" href="https://twitch.tv/nincaleb" target="_blank" rel="noreferrer">Twitch</a>
-        <a class="btn" href="https://youtube.com/nincalebfn" target="_blank" rel="noreferrer">YouTube</a>
-        <a class="btn" href="https://github.com/nincaleb" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="https://steamcommunity.com/id/nincaleb" target="_blank" rel="noreferrer">Steam</a>
-        <a class="btn" href="https://app.sage.party/email">Email</a>
-      </div>
-
-      <div class="row two">
-        <button class="btn" id="toggleEmbed">Watch live (embed)</button>
+        <button class="btn primary" id="toggleEmailEmbed">Show email login (embed)</button>
+        <a class="btn" href="https://app.sage.party/email" target="_blank" rel="noreferrer">Open in new tab</a>
         <button class="btn danger" id="copyDiscord">Copy Discord: nincaleb</button>
       </div>
 
       <p class="hint">
-        Heads up: the Twitch embed only works when this page is hosted on a real domain (not opened as a local file).
+        If the embed is blank or says it’s blocked, use “Open in new tab”.
       </p>
     </header>
 
     <section class="card">
       <div class="card-top">
-        <h2>Live</h2>
-        <div class="status" id="statusPill">
+        <h2>Email</h2>
+        <div class="status" id="emailStatus">
           <span class="dot warn"></span>
-          <span id="statusText">Embed off</span>
+          <span id="emailStatusText">Embed off</span>
         </div>
       </div>
 
-      <div id="embedWrap" class="embed-wrap" hidden>
-        <div class="embed-grid">
-          <div class="embed">
-            <div class="embed-head">
-              <span>Stream</span>
-              <span class="mini" id="parentHint"></span>
-            </div>
-            <div class="frame-wrap">
-              <iframe
-                id="twitchPlayer"
-                title="Twitch Player"
-                allowfullscreen
-                scrolling="no"
-                frameborder="0"
-                allow="autoplay; fullscreen"
-              ></iframe>
-            </div>
+      <div id="emailEmbedWrap" class="embed-wrap" hidden>
+        <div class="embed" style="margin-top:14px">
+          <div class="embed-head">
+            <span>SAGE Email</span>
+            <span class="mini">Embedded</span>
           </div>
 
-          <div class="embed">
-            <div class="embed-head">
-              <span>Chat</span>
-              <span class="mini">Optional</span>
-            </div>
-            <div class="frame-wrap chat">
-              <iframe
-                id="twitchChat"
-                title="Twitch Chat"
-                scrolling="no"
-                frameborder="0"
-              ></iframe>
-            </div>
+          <div class="frame-wrap tall">
+            <iframe
+              id="emailFrame"
+              title="SAGE Email"
+              src=""
+              loading="lazy"
+              referrerpolicy="no-referrer"
+              sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+            ></iframe>
           </div>
         </div>
 
         <p class="fineprint">
-          If the embed is blank, your host/domain needs to be added as a <code>parent=</code> parameter.
-          This page auto-fills it using the current domain.
+          Some sites prevent embedding with security headers (X-Frame-Options / CSP). If this frame won’t load, the new-tab button will always work.
         </p>
       </div>
 
       <div class="divider"></div>
 
-      <div class="grid">
-        <div class="mini-card">
-          <h3>About</h3>
-          <p>
-            I’m Caleb (nincaleb). I stream, code, and mess with PC/competitive settings until they behave.
-          </p>
-        </div>
-
-        <div class="mini-card">
-          <h3>Contact</h3>
-          <ul class="list">
-            <li><span class="k">Discord</span><span class="v">nincaleb</span></li>
-            <li><span class="k">Email</span><span class="v">@nincaleb.online</span></li>
-          </ul>
-        </div>
-
-        <div class="mini-card">
-          <h3>Quick actions</h3>
-          <div class="row">
-            <button class="btn" id="copyLinks">Copy all links</button>
-            <button class="btn" id="troll">Totally normal button</button>
-          </div>
-        </div>
-      </div>
+      <h2>Help</h2>
+      <ul class="list" style="margin-top:10px">
+        <li><span class="k">Discord</span><span class="v">nincaleb</span></li>
+      </ul>
+      <p class="fineprint" style="margin-top:10px">
+        Need help getting into your inbox? DM me on Discord.
+      </p>
     </section>
 
     <footer class="foot">
-      <span>© <span id="year"></span> nincaleb</span>
-      <span class="sep">•</span>
-      <a href="https://github.com/nincaleb" target="_blank" rel="noreferrer">built by nincaleb</a>
+      <span>© <span id="year"></span> nincaleb.online</span>
     </footer>
   </main>
 
@@ -139,7 +91,6 @@
     <div class="modal-inner">
       <h3 id="modalTitle">Message</h3>
       <p id="modalText">…</p>
-
       <div class="modal-actions">
         <button class="btn primary" id="ok">Ok</button>
       </div>
