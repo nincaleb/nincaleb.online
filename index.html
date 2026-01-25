@@ -28,13 +28,13 @@
       </div>
 
       <div class="cta-row">
-        <button class="btn primary" id="toggleEmailEmbed">Show email login (embed)</button>
+        <button class="btn primary" id="toggleEmailEmbed">Open email portal</button>
         <a class="btn" href="https://app.sage.party/email" target="_blank" rel="noreferrer">Open in new tab</a>
         <button class="btn danger" id="copyDiscord">Copy Discord: nincaleb</button>
       </div>
 
       <p class="hint">
-        If the embed is blank or says it’s blocked, use “Open in new tab”.
+        SAGE blocks iframe embeds, so this page launches the official email portal in a new tab.
       </p>
     </header>
 
@@ -51,23 +51,30 @@
         <div class="embed" style="margin-top:14px">
           <div class="embed-head">
             <span>SAGE Email</span>
-            <span class="mini">Embedded</span>
+            <span class="mini">Portal view</span>
           </div>
 
-          <div class="frame-wrap tall">
-            <iframe
-              id="emailFrame"
-              title="SAGE Email"
-              src=""
-              loading="lazy"
-              referrerpolicy="no-referrer"
-              sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-            ></iframe>
+          <div class="pseudo-frame">
+            <div class="pseudo-inner">
+              <div class="pseudo-title">Email is opened securely in a new tab</div>
+              <div class="pseudo-sub">
+                SAGE blocks iframe embedding (<code>X-Frame-Options: sameorigin</code>), so this page launches the official portal.
+              </div>
+
+              <div class="pseudo-actions">
+                <a class="btn primary" href="https://app.sage.party/email" target="_blank" rel="noreferrer">Open SAGE Email</a>
+                <button class="btn" id="copyEmailUrl">Copy email URL</button>
+              </div>
+
+              <div class="pseudo-tip">
+                Tip: if popups are blocked, allow popups for this site.
+              </div>
+            </div>
           </div>
         </div>
 
         <p class="fineprint">
-          Some sites prevent embedding with security headers (X-Frame-Options / CSP). If this frame won’t load, the new-tab button will always work.
+          This is the closest “embedded” feel without breaking security. Your login still happens on SAGE’s real domain.
         </p>
       </div>
 

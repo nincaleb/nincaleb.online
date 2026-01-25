@@ -1,4 +1,4 @@
-// nincaleb mail portal — JS
+// nincaleb mail portal — JS (pseudo-embed)
 const $ = (id) => document.getElementById(id);
 
 $("year").textContent = new Date().getFullYear();
@@ -23,37 +23,43 @@ document.addEventListener("keydown", (e) => { if (!modal.hidden && e.key === "Es
 const statusText = $("emailStatusText");
 const statusDot = $("emailStatus").querySelector(".dot");
 const wrap = $("emailEmbedWrap");
-const frame = $("emailFrame");
 
-let on = false;
-
-function setStatus(val){
-  if(val){
-    statusText.textContent = "Embed on";
+function setStatus(opened){
+  if(opened){
+    statusText.textContent = "Portal ready";
     statusDot.className = "dot ok";
   }else{
-    statusText.textContent = "Embed off";
+    statusText.textContent = "Portal closed";
     statusDot.className = "dot warn";
   }
 }
 
-$("toggleEmailEmbed").addEventListener("click", () => {
-  on = !on;
+const EMAIL_URL = "https://app.sage.party/email";
 
-  if(on){
-    frame.src = "https://app.sage.party/email";
-    wrap.hidden = false;
-    setStatus(true);
-    $("toggleEmailEmbed").textContent = "Hide email login (embed)";
-    // If embedding is blocked, browsers often show a console error; we can't detect reliably, so we show a hint.
-    openModal("If the embed doesn’t load (blank / blocked), use “Open in new tab”.");
+$("toggleEmailEmbed").addEventListener("click", () => {
+  // "Feels embedded": reveal the portal panel, then launch the real site in a new tab.
+  wrap.hidden = false;
+  setStatus(true);
+
+  const win = window.open(EMAIL_URL, "_blank", "noopener,noreferrer");
+  if(!win){
+    openModal("Popup blocked. Click “Open in new tab” instead (or allow popups for this site).");
   }else{
-    frame.src = "";
-    wrap.hidden = true;
-    setStatus(false);
-    $("toggleEmailEmbed").textContent = "Show email login (embed)";
+    openModal("Opened SAGE Email in a new tab. Keep this page open as your portal.");
   }
 });
+
+const copyEmailUrl = $("copyEmailUrl");
+if(copyEmailUrl){
+  copyEmailUrl.addEventListener("click", async () => {
+    try{
+      await navigator.clipboard.writeText(EMAIL_URL);
+      openModal("Copied: " + EMAIL_URL);
+    }catch{
+      openModal("Couldn’t auto-copy. URL: " + EMAIL_URL);
+    }
+  });
+}
 
 $("copyDiscord").addEventListener("click", async () => {
   const text = "nincaleb";
@@ -65,4 +71,6 @@ $("copyDiscord").addEventListener("click", async () => {
   }
 });
 
+// default state
+wrap.hidden = true;
 setStatus(false);
